@@ -297,7 +297,84 @@ Explanation of Final Features
     Salary: Higher income typically reduces the risk of default as borrowers are better able to meet repayment obligations.
     Remaining Term to Age Ratio: Aligns loan repayment period with borrower’s lifecycle, affecting their repayment capacity.
     Outstanding Balance: Indicates overall debt burden, impacting the borrower’s ability to manage new loans.
+    
+![Untitled](https://github.com/user-attachments/assets/3e020673-6760-48cb-a98c-7d8d2ed5ab99)
+![Untitled-1](https://github.com/user-attachments/assets/d66727dd-bea4-4588-9ef7-ec36a8cea400)
+![Untitled](https://github.com/user-attachments/assets/80081aa5-be2e-44f3-be51-51ea3bff47f0)
+![Untitled-1](https://github.com/user-attachments/assets/67485aa7-c8f5-4e56-9872-e80724ac52be)
+![Untitled](https://github.com/user-attachments/assets/a0a51a1b-f14b-4bf3-ae64-6c8104f31b21)
+![Untitled-1](https://github.com/user-attachments/assets/66f64129-ed11-45d5-bcc8-fe09fe96efaa)
 
+
+
+
+
+
+
+
+    Moddeling
+
+Classifiers, including RandomForest, LogisticRegression, SVC, DecisionTree, GaussianNB, KNeighborsClassifier, GradientBoosting, and XGBoost were used for modeling. These classifiers encompass a wide range of approaches, from ensemble and linear models to probabilistic and non-parametric techniques, ensuring a comprehensive evaluation of different predictive methods.
+
+Each classifier is trained on the training set (X_train, y_train) and evaluated on the testing set (X_test, y_test). The evaluation metrics used include accuracy, precision, recall, F1 score, and AUC (Area Under the ROC Curve), providing a multifaceted assessment of each model's performance. The results are compiled into a list of dictionaries, subsequently converted into a DataFrame for streamlined comparison. Additionally, the trained models are saved using joblib, facilitating future use.
+
+The performance metrics are visualized through bar plots, with each metric (Accuracy, Precision, Recall, F1 Score, AUC) displayed separately. This allows for an intuitive comparison of the different classifiers' performance across various metrics.
+
+The function train_and_evaluate_classifiers ensures a thorough evaluation of multiple classifiers, encompassing model training, performance metric calculation, and result visualization. This method assists in identifying the most effective model based on specific evaluation criteria, leading to more accurate and reliable predictions of loan defaults. The example usage section illustrates the application of this function with a preprocessed dataset, underscoring the importance of proper data preparation and splitting to achieve reliable model evaluation.
+
+By implementing this systematic approach, practitioners can gain valuable insights into the performance of various classifiers, ultimately aiding in the selection of the best-performing model for loan default prediction.
+
+
+Model Performance Overview and FastAPI Integration
+
+In evaluating the performance of various classifiers for credit default prediction, the Random Forest and XGBoost models stood out with an impressive accuracy of 90%. These models demonstrated exceptional ability in correctly classifying loan defaults and non-defaults. Random Forest, which aggregates predictions from multiple decision trees, and XGBoost, a gradient boosting method, both effectively captured the complex relationships within the dataset.
+
+Other classifiers, including Logistic Regression, Support Vector Classifier (SVC), Decision Tree, Naive Bayes, K-Nearest Neighbors (KNN), and Gradient Boosting, achieved accuracy in the 80% range. While these models also performed well, they did not reach the accuracy levels of Random Forest and XGBoost. The performance variations can be attributed to the distinct strengths and weaknesses of each model type. For example, simpler models like Logistic Regression and Naive Bayes may not capture complex patterns as effectively, while Decision Trees might overfit the data if not tuned properly. SVC and KNN performance can be influenced by parameter settings, and Gradient Boosting requires careful hyperparameter tuning.
+FastAPI Deployment and Majority Voting Mechanism
+
+For deploying the model predictions, a FastAPI application has been developed. This API uses all the trained models to provide predictions based on the top features identified in the feature engineering process. To determine the final prediction, the API employs a majority voting mechanism. This approach aggregates predictions from all loaded models, and the final prediction is based on the majority vote. This method leverages the combined strengths of different models to enhance prediction reliability and robustness.
+
+The FastAPI setup includes endpoints for prediction and model listing, and it handles input data preprocessing, feature encoding, and missing value management. The use of majority voting ensures that the final prediction benefits from the diverse perspectives of all models, aiming for a more accurate and reliable outcome.
+
+
+
+
+
+Deployment
+
+For deployment, a FastAPI application was developed to predict loan defaults using the top features selected through feature engineering. The key features utilized in the prediction models include interest_rate, age, loan_amount, number_of_defaults, salary, outstanding_balance, location, marital_status, gender, and is_employed.
+
+The FastAPI application begins by configuring logging to capture and store log messages both in a file and on the console. The feature columns used for prediction are predefined, and the models are loaded dynamically from their respective joblib files. Additionally, label mappings and target mappings are loaded from JSON files to facilitate encoding and decoding of categorical features and target labels.
+
+The main components of the FastAPI application include:
+
+    Data Structure Definition: The PredictionRequest class is defined using Pydantic to specify the expected structure of the prediction input data.
+    Root Route: The root endpoint returns a message indicating the owner of the application.
+    Prediction Endpoint: The /predict endpoint handles prediction requests. It logs the incoming request data, converts it into a pandas DataFrame, renames columns according to a predefined mapping, and encodes categorical variables using the label mappings. Missing columns are added with default values, and the columns are reordered to match the expected order by the models. Predictions are made using each model, and the results, along with the raw payload, are returned in the response.
+    Models List Endpoint: The /models endpoint returns a list of all loaded model names.
+    Application Startup: The application is started using Uvicorn, specifying the host and port for the FastAPI server.
+
+The pipeline used in the FastAPI application can be summarized as follows:
+
+    Data Preparation: The input data is received in the form of a JSON payload, which is validated and converted into a pandas DataFrame.
+    Feature Mapping and Encoding: The DataFrame columns are renamed, and categorical features are encoded using predefined mappings. Any missing columns are added to ensure consistency.
+    Model Prediction: Each model makes predictions on the prepared input data. The predicted class and probability (if available) are stored for each model.
+    Response Construction: The final predictions, along with the raw input payload, are returned in the response, providing transparency and traceability.
+
+
+
+
+
+
+Future Directions for Model Optimization and Accuracy Enhancement
+
+To further refine model performance, advanced feature engineering techniques should be explored. Developing new features that capture interactions between existing variables, such as interaction terms between loan amount and income, can provide deeper insights into default patterns. Dimensionality reduction methods like Principal Component Analysis (PCA) or t-Distributed Stochastic Neighbor Embedding (t-SNE) can help simplify model complexity by reducing the number of features while preserving essential information. Feature scaling and normalization techniques, such as Min-Max scaling or Standardization, should be applied to ensure that all features contribute equally to the model, which is particularly beneficial for models sensitive to feature scales like SVC and KNN. Additionally, advanced feature selection algorithms, including Recursive Feature Elimination with Cross-Validation (RFECV) and ensemble-based feature importance methods, can refine the feature set used in models.
+
+Model enhancement strategies are also crucial for improving accuracy and robustness. Comprehensive hyperparameter tuning using Grid Search or Random Search should be conducted for all models to optimize parameters such as the number of trees, maximum depth, and learning rate. Beyond majority voting, exploring sophisticated ensemble methods like stacking or blending can combine multiple models' strengths, potentially enhancing predictive accuracy. Implementing K-Fold Cross-Validation can provide a more accurate estimate of model performance by evaluating it on various data subsets, thus reducing the risk of overfitting. Additionally, investigating advanced algorithms or variations, such as CatBoost or LightGBM, which efficiently handle categorical features and large datasets, could further boost model performance.
+
+In-depth data analysis and augmentation strategies can offer new insights and improve model training. Performing comprehensive Exploratory Data Analysis (EDA) helps uncover patterns, trends, and anomalies in the data, providing a better understanding of data distribution and detecting potential quality issues. Data augmentation techniques, like SMOTE (Synthetic Minority Over-sampling Technique), can address class imbalance, and other methods can generate additional synthetic examples. For datasets with time-based features, incorporating temporal analysis can capture trends and seasonality, enhancing the model’s ability to predict future outcomes.
+
+Finally, establishing a framework for continuous monitoring and improvement is essential for maintaining and enhancing model performance. Regularly tracking model performance in production and retraining models with updated data ensures they remain accurate and relevant as data patterns evolve. Collecting and analyzing user feedback can help identify areas for improvement, integrating practical insights into the model. Additionally, creating a process for incorporating new data and updating models is crucial for sustaining long-term model effectiveness.
 
 
 
