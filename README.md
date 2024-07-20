@@ -185,6 +185,12 @@ Several prominent outliers in the "outstanding_balance" feature, with some balan
 Interest Rate Outliers
 
 There are clear outliers in the "interest_rate" feature, with some rates reaching as high as around 28%. These outliers could indicate higher risk associated with certain borrowers or loan arrangements, suggesting that the lender has identified these borrowers as higher-risk due to factors like poor credit history or unstable income. Alternatively, the outliers could represent unique loan structures or special circumstances warranting elevated interest rates. Closely examining these outliers and understanding the underlying reasons behind them could provide valuable insights for risk assessment, pricing strategies, and risk mitigation measures, helping to maintain a balanced and sustainable loan portfolio.
+![Untitled-1](https://github.com/user-attachments/assets/92d158c3-9e44-4d0d-bdbb-c2e0cf4d7712)
+
+![Untitled](https://github.com/user-attachments/assets/5c88885c-e30e-476d-a8dc-20e249ac24ce)
+![Untitled-1](https://github.com/user-attachments/assets/cc87749e-4e6e-484d-95bc-57018a40c5ab)
+
+
 
 
 
@@ -305,6 +311,9 @@ Explanation of Final Features
 ![Untitled](https://github.com/user-attachments/assets/a0a51a1b-f14b-4bf3-ae64-6c8104f31b21)
 ![Untitled-1](https://github.com/user-attachments/assets/66f64129-ed11-45d5-bcc8-fe09fe96efaa)
 
+![Untitled](https://github.com/user-attachments/assets/1522207e-fef4-4e31-9e08-58f5ca7a5fb2)
+
+
 
 
 
@@ -360,6 +369,18 @@ The pipeline used in the FastAPI application can be summarized as follows:
     Feature Mapping and Encoding: The DataFrame columns are renamed, and categorical features are encoded using predefined mappings. Any missing columns are added to ensure consistency.
     Model Prediction: Each model makes predictions on the prepared input data. The predicted class and probability (if available) are stored for each model.
     Response Construction: The final predictions, along with the raw input payload, are returned in the response, providing transparency and traceability.
+
+    ![image](https://github.com/user-attachments/assets/601df986-d0cd-49cc-bba0-edd61465533c)
+
+    ![image](https://github.com/user-attachments/assets/0b037f5f-ea7b-48bc-8e74-58c9d3b17242)
+
+    ![image](https://github.com/user-attachments/assets/113c7c2e-0ec6-4ef2-8920-9021e2cb6643)
+
+    ![image](https://github.com/user-attachments/assets/db51f0ff-d86b-4b88-a724-b3eba895c33a)
+
+
+
+
 
 
 
