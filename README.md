@@ -370,18 +370,13 @@ The pipeline used in the FastAPI application can be summarized as follows:
     Model Prediction: Each model makes predictions on the prepared input data. The predicted class and probability (if available) are stored for each model.
     Response Construction: The final predictions, along with the raw input payload, are returned in the response, providing transparency and traceability.
 
-    ![image](https://github.com/user-attachments/assets/601df986-d0cd-49cc-bba0-edd61465533c)
+    ![image](https://github.com/user-attachments/assets/748ea22c-6357-4142-93d3-a37cb7d1114a)
 
-    ![image](https://github.com/user-attachments/assets/0b037f5f-ea7b-48bc-8e74-58c9d3b17242)
+    ![image](https://github.com/user-attachments/assets/44e9a0d0-8c49-45a1-81ed-4b345f3c87a1)
 
-    ![image](https://github.com/user-attachments/assets/113c7c2e-0ec6-4ef2-8920-9021e2cb6643)
+    ![image](https://github.com/user-attachments/assets/cee389a9-fce5-4553-8ae9-c7f67ddbbd67)
 
-    ![image](https://github.com/user-attachments/assets/db51f0ff-d86b-4b88-a724-b3eba895c33a)
-
-
-
-
-
+    ![image](https://github.com/user-attachments/assets/af360e45-2bcb-4846-9669-512a9902ad52)
 
 
 
