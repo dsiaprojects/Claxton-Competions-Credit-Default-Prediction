@@ -345,6 +345,9 @@ For deploying the model predictions, a FastAPI application has been developed. T
 
 The FastAPI setup includes endpoints for prediction and model listing, and it handles input data preprocessing, feature encoding, and missing value management. The use of majority voting ensures that the final prediction benefits from the diverse perspectives of all models, aiming for a more accurate and reliable outcome.
 
+![Untitled](https://github.com/user-attachments/assets/5ba136f4-3af0-4a70-8e3b-98b385e2802f)
+
+
 
 
 
